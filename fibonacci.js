@@ -32,7 +32,9 @@ function fibsRec(n) {
                 fibonacci.push(1);
                 recursion(i + 1);
             } else {
-                const nextDigit = fibonacci[fibonacci.length - 2] + fibonacci[fibonacci.length - 1];
+                const nextDigit =
+                    fibonacci[fibonacci.length - 2] +
+                    fibonacci[fibonacci.length - 1];
                 fibonacci.push(nextDigit);
                 recursion(i + 1);
             }
@@ -42,11 +44,35 @@ function fibsRec(n) {
 }
 
 //fibonacci with recursion simplified
-function fibRec(n){
-    if(n<2){
-      return [0,1]
+function fibRec(n) {
+    if (n < 2) {
+        return [0, 1];
     }
-    let arr = fibRec(n-1)
-    arr.push(arr[arr.length-1]+arr[arr.length-2])
-    return arr
-  }
+    let arr = fibRec(n - 1);
+    arr.push(arr[arr.length - 1] + arr[arr.length - 2]);
+    return arr;
+}
+
+//merge sort algorithms 
+function mergeSort(arr) {
+    if (arr.length < 2) {
+        return arr;
+    } else {
+        const middle = Math.floor(arr.length / 2);
+        const leftArr = arr.slice(0, middle);
+        const rightArr = arr.slice(middle);
+        return merge(mergeSort(leftArr), mergeSort(rightArr));
+    }
+}
+
+function merge(leftArr, rightArr) {
+    const sortedArr = [];
+    while (leftArr.length > 0 && rightArr.length > 0) {
+        if (leftArr[0] <= rightArr[0]) {
+            sortedArr.push(leftArr.shift());
+        } else {
+            sortedArr.push(rightArr.shift());
+        }
+    }
+    return [...sortedArr, ...leftArr, ...rightArr];
+}
